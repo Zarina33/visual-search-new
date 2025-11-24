@@ -1,0 +1,72 @@
+[tool.poetry]
+name = "visual-search-project"
+version = "0.1.0"
+description = "Visual search system for products using CLIP"
+authors = ["Your Name <your.email@example.com>"]
+readme = "README.md"
+packages = [{include = "app"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+#torch = "^2.1.0"
+#torchvision = "^0.16.0"
+transformers = "^4.35.0"
+qdrant-client = "^1.7.0"
+psycopg2-binary = "^2.9.9"
+sqlalchemy = {extras = ["asyncio"], version = "^2.0.23"}
+asyncpg = "^0.29.0"
+loguru = "^0.7.2"
+fastapi = "^0.104.1"
+uvicorn = {extras = ["standard"], version = "^0.24.0"}
+celery = "^5.3.4"
+redis = "^5.0.1"
+pillow = "^10.1.0"
+numpy = "^1.26.2"
+python-dotenv = "^1.0.0"
+pydantic-settings = "^2.1.0"
+httpx = "^0.25.2"
+tenacity = "^8.2.3"
+pydantic = "^2.5.0"
+tqdm = "^4.66.0"
+safetensors = "^0.4.0"
+prometheus-client = "^0.19.0"
+python-multipart = "^0.0.6"
+boto3 = "^1.40.70"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.3"
+pytest-asyncio = "^0.21.1"
+pytest-cov = "^4.1.0"
+black = "^23.11.0"
+isort = "^5.12.0"
+flake8 = "^6.1.0"
+mypy = "^1.7.1"
+httpx = "^0.25.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 100
+target-version = ['py39']
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+line_length = 100
+multi_line_output = 3
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+

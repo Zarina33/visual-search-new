@@ -1,0 +1,11 @@
+cdn_images/
+__pycache__/
+*.pyc
+.env
+*.log
+.DS_Store
+*.pkl
+*.pth
+*.onnx
+venv/
+.venv/
