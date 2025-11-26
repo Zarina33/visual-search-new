@@ -1,11 +1,47 @@
-cdn_images/
+# Python
 __pycache__/
-*.pyc
-.env
-*.log
-.DS_Store
-*.pkl
-*.pth
-*.onnx
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
 venv/
-.venv/
+*.egg-info/
+dist/
+build/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data & Models
+data/
+models/
+*.pth
+*.bin
+*.safetensors
+*.ckpt
+checkpoints/
+
+# Logs
+logs/
+*.log
+nohup.out
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Uploads & Outputs
+uploads/
+outputs/
+results/
+
+# Environment
+.env
+*.env
