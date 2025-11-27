@@ -31,7 +31,7 @@ init-db:
 	poetry run python scripts/load_sample_data.py
 
 api:
-	poetry run uvicorn app.api.main:app --host 0.0.0.0 --port 8000 --reload
+	poetry run uvicorn app.api.main:app --host 0.0.0.0 --port 8008 --reload
 
 worker:
 	poetry run celery -A app.workers.celery_app worker --loglevel=info

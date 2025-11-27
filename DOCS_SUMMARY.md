@@ -164,10 +164,10 @@
 docker-compose up -d
 
 # 2. Запустить API
-poetry run uvicorn app.api.main:app --host 0.0.0.0 --port 8000
+poetry run uvicorn app.api.main:app --host 0.0.0.0 --port 8008
 
 # 3. Проверить
-curl http://localhost:8000/api/v1/health
+curl http://localhost:8008/api/v1/health
 ```
 
 **Подробности в RESTART_GUIDE.md**

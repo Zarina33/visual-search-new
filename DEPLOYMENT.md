@@ -160,7 +160,7 @@ LOG_LEVEL=INFO
 
 # API
 API_HOST=0.0.0.0
-API_PORT=8000
+API_PORT=8008
 API_WORKERS=4
 
 # PostgreSQL
@@ -304,7 +304,7 @@ Type=simple
 User=YOUR_USERNAME
 WorkingDirectory=/home/YOUR_USERNAME/projects/visual-search-project
 Environment="PATH=/home/YOUR_USERNAME/.local/bin:/usr/bin"
-ExecStart=/home/YOUR_USERNAME/.local/bin/poetry run uvicorn app.api.main:app --host 0.0.0.0 --port 8000 --workers 4
+ExecStart=/home/YOUR_USERNAME/.local/bin/poetry run uvicorn app.api.main:app --host 0.0.0.0 --port 8008 --workers 4
 Restart=always
 RestartSec=10
 
@@ -390,7 +390,7 @@ server {
     client_max_body_size 20M;
 
     location / {
-        proxy_pass http://127.0.0.1:8000;
+        proxy_pass http://127.0.0.1:8008;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -470,13 +470,13 @@ sudo ufw status
 
 ```bash
 # API health check
-curl http://localhost:8000/api/v1/health
+curl http://localhost:8008/api/v1/health
 
 # Детальная проверка
-curl http://localhost:8000/api/v1/health/detailed
+curl http://localhost:8008/api/v1/health/detailed
 
 # Метрики
-curl http://localhost:8000/api/v1/metrics
+curl http://localhost:8008/api/v1/metrics
 ```
 
 ### Просмотр логов
@@ -583,7 +583,7 @@ poetry run python scripts/test_webhook_local.py
 sudo journalctl -u visual-search-api -n 50
 
 # Проверить порт
-sudo netstat -tulpn | grep 8000
+sudo netstat -tulpn | grep 8008
 
 # Проверить Docker сервисы
 docker-compose ps
@@ -648,7 +648,7 @@ sudo systemctl start visual-search-api
 sudo systemctl start visual-search-celery
 
 # 6. Проверить
-curl http://localhost:8000/api/v1/health
+curl http://localhost:8008/api/v1/health
 ```
 
 ---

@@ -24,7 +24,7 @@ class Settings(BaseSettings):
     
     # API Settings
     api_host: str = Field(default="0.0.0.0", description="API host")
-    api_port: int = Field(default=8000, description="API port")
+    api_port: int = Field(default=8008, description="API port")
     api_workers: int = Field(default=4, description="Number of API workers")
     
     # PostgreSQL Settings
@@ -111,7 +111,10 @@ class Settings(BaseSettings):
         description="Allowed image formats (comma-separated)"
     )
     image_quality: int = Field(default=85, description="Image compression quality")
-    
+    image_base_url: str = Field(
+        default="http://localhost",
+        description="Base URL for serving images (e.g., https://visual-search.airun.kg)"
+    )    
     @property
     def allowed_formats_list(self) -> List[str]:
         """Get list of allowed image formats."""

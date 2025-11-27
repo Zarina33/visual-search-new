@@ -308,8 +308,8 @@ async def save_to_databases(
         
         # Локальный URL
         relative_path = img_path.relative_to(LOCAL_STORAGE)
-        local_url = f"{BASE_URL}/{relative_path}"
-        
+        #local_url = f"{BASE_URL}/{relative_path}"
+        local_url = f"/images/{relative_path}"
         # Данные товара
         product_data = {
             "external_id": f"bakai_{product_id}",

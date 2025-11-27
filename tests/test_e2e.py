@@ -10,7 +10,7 @@ import httpx
 import time
 
 # Test configuration
-API_BASE_URL = "http://localhost:8000"
+API_BASE_URL = "http://localhost:8008"
 TEST_IMAGES_DIR = Path(__file__).parent.parent / "test_images"
 
 

@@ -9,7 +9,7 @@ from io import BytesIO
 
 from app.workers.celery_app import celery_app
 from app.models.clip_model import CLIPModel
-from app.db.qdrant import QdrantClient
+from app.db.qdrant import QdrantManager
 from app.db.postgres import PostgresClient
 from app.utils.image_processing import download_image, process_image
 

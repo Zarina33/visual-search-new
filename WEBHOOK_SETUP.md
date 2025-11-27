@@ -84,13 +84,13 @@ sudo systemctl restart visual-search-api
 sudo systemctl restart visual-search-celery
 
 # Или вручную (Ctrl+C и заново)
-poetry run uvicorn app.api.main:app --host 0.0.0.0 --port 8000
+poetry run uvicorn app.api.main:app --host 0.0.0.0 --port 8008
 ```
 
 ### Шаг 4: Проверить что webhook endpoint работает
 
 ```bash
-curl http://localhost:8000/api/v1/webhooks/health
+curl http://localhost:8008/api/v1/webhooks/health
 ```
 
 **Ожидаемый ответ:**
@@ -269,12 +269,12 @@ sudo mv ngrok /usr/local/bin/
 ngrok config add-authtoken YOUR_AUTH_TOKEN
 
 # 3. Запустить туннель
-ngrok http 8000
+ngrok http 8008
 ```
 
 **Вывод ngrok:**
 ```
-Forwarding    https://abc123.ngrok.io -> http://localhost:8000
+Forwarding    https://abc123.ngrok.io -> http://localhost:8008
 ```
 
 **Временный URL для BakaiMarket:**
@@ -293,11 +293,11 @@ https://abc123.ngrok.io/api/v1/webhooks/bakai
 
 **Что нужно:**
 1. Публичный статический IP адрес
-2. Открытый порт 8000 (или другой)
+2. Открытый порт 8008 (или другой)
 
 **URL:**
 ```
-http://123.45.67.89:8000/api/v1/webhooks/bakai
+http://123.45.67.89:8008/api/v1/webhooks/bakai
 ```
 
 **⚠️ Недостатки:**
@@ -352,7 +352,7 @@ PAYLOAD='{"event_type":"product.created","event_id":"test_001","timestamp":"2025
 SIGNATURE=$(echo -n "$PAYLOAD" | openssl dgst -sha256 -hmac "$SECRET" | cut -d' ' -f2)
 
 # 2. Отправить запрос
-curl -X POST "http://localhost:8000/api/v1/webhooks/bakai" \
+curl -X POST "http://localhost:8008/api/v1/webhooks/bakai" \
   -H "Content-Type: application/json" \
   -H "X-Webhook-Signature: sha256=$SIGNATURE" \
   -d "$PAYLOAD"
@@ -425,7 +425,7 @@ http://visual-search.bakaimarket.kg/api/v1/webhooks/bakai
 sudo ufw allow 443/tcp
 
 # Закрыть прямой доступ к API (если используется Nginx)
-sudo ufw deny 8000/tcp
+sudo ufw deny 8008/tcp
 ```
 
 ---
@@ -436,10 +436,10 @@ sudo ufw deny 8000/tcp
 
 ```bash
 # 1. Проверить health
-curl http://localhost:8000/api/v1/webhooks/health
+curl http://localhost:8008/api/v1/webhooks/health
 
 # 2. Проверить метрики
-curl http://localhost:8000/api/v1/metrics | grep webhook
+curl http://localhost:8008/api/v1/metrics | grep webhook
 
 # 3. Проверить логи
 tail -f logs/app_$(date +%Y-%m-%d).log | grep webhook
@@ -505,7 +505,7 @@ visual_search_webhook_processing_duration_seconds{event_type="product.created"} 
 
 ```bash
 # 1. Проверить что API запущен
-curl http://localhost:8000/api/v1/health
+curl http://localhost:8008/api/v1/health
 
 # 2. Проверить что Celery работает
 sudo systemctl status visual-search-celery

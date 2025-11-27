@@ -27,6 +27,26 @@ qdrant_manager: Optional[QdrantManager] = None
 # Максимальный размер файла (10MB)
 MAX_FILE_SIZE = 10 * 1024 * 1024
 
+def prepare_image_url(image_url: Optional[str]) -> Optional[str]:
+    """
+    Подготовить URL изображения, добавляя базовый URL если нужно.
+    
+    Args:
+        image_url: URL изображения из базы данных
+        
+    Returns:
+        Полный URL изображения или None
+    """
+    if not image_url:
+        return None
+    
+    # Если это относительный путь, добавить базовый URL
+    if image_url.startswith("/"):
+        return f"{settings.image_base_url}{image_url}"
+    
+    # Если уже полный URL, вернуть как есть
+    return image_url
+
 
 def get_clip_embedder() -> CLIPEmbedder:
     """Get CLIP embedder instance."""
@@ -112,7 +132,8 @@ async def search_by_text(
                             category=product.category,
                             price=product.price,
                             currency=product.currency,
-                            image_url=product.image_url,
+                            #image_url=product.image_url,
+                            image_url=prepare_image_url(product.image_url),
                             similarity_score=vector_result["score"]
                         )
                     )
@@ -234,7 +255,8 @@ async def search_by_image(
                             category=product.category,
                             price=product.price,
                             currency=product.currency,
-                            image_url=product.image_url,
+                            #image_url=product.image_url,
+                            image_url=prepare_image_url(product.image_url),
                             similarity_score=vector_result["score"]
                         )
                     )

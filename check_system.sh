@@ -151,9 +151,9 @@ echo -e "${BLUE}--- Проверка API (опционально) ---${NC}"
 echo ""
 
 # 13. API запущен (опционально)
-if check "API health endpoint" "curl -s http://localhost:8000/api/v1/health | grep -q healthy" "true"; then
+if check "API health endpoint" "curl -s http://localhost:8008/api/v1/health | grep -q healthy" "true"; then
     # Проверить детальный health check
-    if curl -s http://localhost:8000/api/v1/health/detailed 2>/dev/null | grep -q '"status":"healthy"'; then
+    if curl -s http://localhost:8008/api/v1/health/detailed 2>/dev/null | grep -q '"status":"healthy"'; then
         echo -e "  Детальная проверка: ${GREEN}✅ Все компоненты здоровы${NC}"
     fi
 fi
@@ -216,8 +216,8 @@ if [ $FAILED -eq 0 ]; then
         echo -e "${GREEN}🎉 Все проверки пройдены успешно!${NC}"
         echo ""
         echo -e "${BLUE}Следующие шаги:${NC}"
-        echo "1. Запустите API: poetry run uvicorn app.api.main:app --host 0.0.0.0 --port 8000 --reload"
-        echo "2. Откройте документацию: http://localhost:8000/docs"
+        echo "1. Запустите API: poetry run uvicorn app.api.main:app --host 0.0.0.0 --port 8008 --reload"
+        echo "2. Откройте документацию: http://localhost:8008/docs"
         echo "3. Запустите тесты: poetry run pytest"
     else
         echo -e "${YELLOW}⚠️  Система работает, но есть предупреждения${NC}"

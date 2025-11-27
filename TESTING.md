@@ -331,13 +331,13 @@ nvidia-smi
 ### 8.1. Запустить API
 
 ```bash
-poetry run uvicorn app.api.main:app --host 0.0.0.0 --port 8000 --reload
+poetry run uvicorn app.api.main:app --host 0.0.0.0 --port 8008 --reload
 ```
 
 **Ожидаемый вывод:**
 ```
 INFO:     Will watch for changes in these directories: ['/home/user/Desktop/BakaiMarket/visual-search-project']
-INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Uvicorn running on http://0.0.0.0:8008 (Press CTRL+C to quit)
 INFO:     Started reloader process [XXXXX] using StatReload
 INFO:     Started server process [XXXXX]
 INFO:     Waiting for application startup.
@@ -349,7 +349,7 @@ INFO:     Application startup complete.
 ### 8.2. Проверить health endpoint (в новом терминале)
 
 ```bash
-curl http://localhost:8000/api/v1/health
+curl http://localhost:8008/api/v1/health
 ```
 
 **Ожидаемый вывод:**
@@ -364,7 +364,7 @@ curl http://localhost:8000/api/v1/health
 ### 8.3. Детальная проверка
 
 ```bash
-curl http://localhost:8000/api/v1/health/detailed
+curl http://localhost:8008/api/v1/health/detailed
 ```
 
 **Ожидаемый вывод:**
@@ -383,7 +383,7 @@ curl http://localhost:8000/api/v1/health/detailed
 ### 8.4. Открыть Swagger UI
 
 ```
-http://localhost:8000/docs
+http://localhost:8008/docs
 ```
 
 ### ✅ Результат: API сервер работает
@@ -401,7 +401,7 @@ poetry run python scripts/load_demo_products.py
 ### 9.2. Тест поиска с тестовым изображением
 
 ```bash
-curl -X POST "http://localhost:8000/api/v1/search/by-image?limit=5" \
+curl -X POST "http://localhost:8008/api/v1/search/by-image?limit=5" \
   -F "image=@test_images/red_square.jpg"
 ```
 
@@ -429,7 +429,7 @@ curl -X POST "http://localhost:8000/api/v1/search/by-image?limit=5" \
 docker exec visual_search_postgres psql -U bakaimarket -d market -c "SELECT id FROM products LIMIT 1;"
 
 # Использовать его фото
-curl -X POST "http://localhost:8000/api/v1/search/by-image?limit=5" \
+curl -X POST "http://localhost:8008/api/v1/search/by-image?limit=5" \
   -F "image=@/tmp/bakai_products/118133_87295487377438.jpeg" | python3 -m json.tool
 ```
 
@@ -448,7 +448,7 @@ poetry run python scripts/test_search_api.py
 ### 10.1. Простой текстовый запрос
 
 ```bash
-curl -X POST "http://localhost:8000/api/v1/search/by-text" \
+curl -X POST "http://localhost:8008/api/v1/search/by-text" \
   -H "Content-Type: application/json" \
   -d '{"query": "телефон", "limit": 5}'
 ```
@@ -465,7 +465,7 @@ curl -X POST "http://localhost:8000/api/v1/search/by-text" \
 ### 10.2. Тест с минимальным порогом
 
 ```bash
-curl -X POST "http://localhost:8000/api/v1/search/by-text" \
+curl -X POST "http://localhost:8008/api/v1/search/by-text" \
   -H "Content-Type: application/json" \
   -d '{"query": "красный диван", "limit": 10, "min_similarity": 0.7}'
 ```
@@ -473,7 +473,7 @@ curl -X POST "http://localhost:8000/api/v1/search/by-text" \
 ### 10.3. Поиск похожих товаров
 
 ```bash
-curl "http://localhost:8000/api/v1/search/similar/118133?limit=5"
+curl "http://localhost:8008/api/v1/search/similar/118133?limit=5"
 ```
 
 ### ✅ Результат: Текстовый поиск работает
@@ -485,7 +485,7 @@ curl "http://localhost:8000/api/v1/search/similar/118133?limit=5"
 ### 11.1. Проверить webhook health
 
 ```bash
-curl http://localhost:8000/api/v1/webhooks/health
+curl http://localhost:8008/api/v1/webhooks/health
 ```
 
 **Ожидаемый вывод:**
@@ -500,7 +500,7 @@ curl http://localhost:8000/api/v1/webhooks/health
 ### 11.2. Тест webhook (без подписи)
 
 ```bash
-curl -X POST "http://localhost:8000/api/v1/webhooks/test" \
+curl -X POST "http://localhost:8008/api/v1/webhooks/test" \
   -H "Content-Type: application/json" \
   -d '{
     "event_type": "product.created",
@@ -809,7 +809,7 @@ find . -type d -name "__pycache__" -exec rm -rf {} + 2>/dev/null || true
 sudo lsof -i :5432  # PostgreSQL
 sudo lsof -i :6379  # Redis
 sudo lsof -i :6333  # Qdrant
-sudo lsof -i :8000  # API
+sudo lsof -i :8008  # API
 
 # Остановить конфликтующие процессы или изменить порты в .env
 ```

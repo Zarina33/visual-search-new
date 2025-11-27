@@ -10,7 +10,7 @@ celery_app = Celery(
     "visual_search_workers",
     broker=settings.celery_broker_url,
     backend=settings.celery_result_backend,
-    include=["app.workers.tasks"],
+    include=["app.workers.webhook_tasks"],
 )
 
 # Configure Celery

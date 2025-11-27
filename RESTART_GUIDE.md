@@ -24,19 +24,19 @@ docker-compose ps
 ### **Шаг 2: Запустить API сервер**
 
 ```bash
-poetry run uvicorn app.api.main:app --host 0.0.0.0 --port 8000 --reload
+poetry run uvicorn app.api.main:app --host 0.0.0.0 --port 8008 --reload
 ```
 
 **API доступен на:**
-- `http://localhost:8000`
-- `http://localhost:8000/docs` (документация)
+- `http://localhost:8008`
+- `http://localhost:8008/docs` (документация)
 
 ---
 
 ### **Шаг 3: Проверить что работает**
 
 ```bash
-curl http://localhost:8000/api/v1/health
+curl http://localhost:8008/api/v1/health
 ```
 
 Должен вернуть: `{"status":"healthy",...}`

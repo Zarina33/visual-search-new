@@ -270,10 +270,10 @@ poetry run python scripts/init_databases.py
 poetry run python scripts/load_demo_products.py
 
 # 7. Запустить API
-poetry run uvicorn app.api.main:app --host 0.0.0.0 --port 8000 --reload
+poetry run uvicorn app.api.main:app --host 0.0.0.0 --port 8008 --reload
 
 # 8. Открыть документацию
-open http://localhost:8000/docs
+open http://localhost:8008/docs
 ```
 
 ---
@@ -345,7 +345,7 @@ poetry run python scripts/test_search_api.py
 ### Prometheus метрики
 
 ```bash
-curl http://localhost:8000/api/v1/metrics
+curl http://localhost:8008/api/v1/metrics
 ```
 
 Основные метрики:
@@ -376,7 +376,7 @@ tail -f logs/app_$(date +%Y-%m-%d).log
 
 ```bash
 # Проверить порт
-sudo netstat -tulpn | grep 8000
+sudo netstat -tulpn | grep 8008
 
 # Проверить Docker
 docker-compose ps
